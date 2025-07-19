@@ -1,0 +1,19 @@
+<script>
+  function showTab(tabId, event) {
+    const contents = document.querySelectorAll('.tab-content');
+    const buttons = document.querySelectorAll('.tab-button');
+
+    contents.forEach(content => content.classList.remove('active'));
+    buttons.forEach(button => {
+      button.classList.remove('active');
+      button.setAttribute('aria-selected', 'false');
+    });
+
+    document.getElementById(tabId).classList.add('active');
+    event.currentTarget.classList.add('active');
+    event.currentTarget.setAttribute('aria-selected', 'true');
+  }
+
+  // Set current year in footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
