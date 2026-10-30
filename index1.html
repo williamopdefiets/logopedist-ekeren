@@ -1,14 +1,15 @@
 <!DOCTYPE html>
+
 <html lang="nl-BE">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
-  <meta content="#f7f8f4" name="theme-color"/>
-  <meta content="Logopedist Ekeren: informatie over logopedische begeleiding, werkwijze, contact en indicatieve tarieven." name="description"/>
-  <title>
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="#f7f8f4" name="theme-color"/>
+<meta content="Logopedist Ekeren: informatie over logopedische begeleiding, werkwijze, contact en indicatieve tarieven." name="description"/>
+<title>
    Logopedist Ekeren | Logopediepraktijk
   </title>
-  <style>
+<style>
 :root {
   --ink:#203c35;
   --muted:#64766d;
@@ -486,250 +487,335 @@ tbody tr:hover {
     width:23%
   }
 }
+  
+/* Google Maps: past zich automatisch aan aan smartphone en desktop. */
+.praktijk-locatie {
+  margin-top: 24px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: var(--white);
+  box-shadow: var(--shadow);
+}
+.praktijk-locatie h3 { margin: 0 0 6px; }
+.praktijk-locatie p { margin: 0 0 16px; color: var(--muted); }
+.praktijk-kaart {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  min-height: 260px;
+  max-height: 420px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--sage);
+}
+.praktijk-kaart iframe { display: block; width: 100%; height: 100%; border: 0; }
+@media (max-width: 650px) {
+  .praktijk-locatie { padding: 16px; }
+  .praktijk-kaart { aspect-ratio: 4 / 5; min-height: 300px; }
+}
+
+
+    /* OPENINGSUREN — compacte, mobielvriendelijke weekplanning */
+    .openingsuren { margin-top: 26px; padding: 24px; background: #fff; border: 1px solid #e2e9e1; border-radius: 22px; box-shadow: 0 10px 28px rgba(25, 54, 43, .06); }
+    .openingsuren h3 { margin: 0 0 6px; }
+    .openingsuren > p { margin: 0 0 18px; color: #5c6b63; }
+    .uren-lijst { list-style: none; margin: 0; padding: 0; }
+    .uren-rij { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding: 13px 14px; border-radius: 12px; }
+    .uren-rij:nth-child(odd) { background: #f3f7f2; }
+    .uren-dag { font-weight: 650; color: #254638; }
+    .uren-tijd { text-align: right; color: #42574c; font-variant-numeric: tabular-nums; }
+    .uren-rij.gesloten .uren-tijd { color: #78847d; }
+    @media (max-width: 420px) {
+      .openingsuren { padding: 16px 12px; }
+      .uren-rij { padding: 12px 9px; gap: 8px; font-size: .9rem; }
+      .uren-tijd { max-width: 62%; }
+    }
   </style>
-  <link href="https://logopedist-ekeren.be/" rel="canonical"/>
- </head>
- <body>
-  <header class="topbar">
-   <div class="container topbar-inner">
-    <a aria-label="Logopedist Ekeren, naar het begin van de pagina" class="brand" href="#boven">
-     <span aria-hidden="true" class="brand-icon">
+<link href="https://logopedist-ekeren.be/" rel="canonical"/>
+<style>
+/* Contactgegevens en openingsuren: twee overzichtelijke kaarten */
+.contact-telephone { margin-top: 14px !important; }
+.inline-contact-icon { display: inline-flex; width: 28px; color: var(--primary, #456b56); font-size: 1.25rem; vertical-align: middle; }
+.uren-card .openingsuren { margin: 0; padding: 0; background: transparent; border: 0; box-shadow: none; }
+.uren-card .openingsuren h3 { margin-top: 0; }
+.uren-card .uren-rij { gap: 12px; }
+@media (max-width: 640px) { .uren-card .openingsuren { padding: 0; } }
+</style></head>
+<body>
+<header class="topbar">
+<div class="container topbar-inner">
+<a aria-label="Logopedist Ekeren, naar het begin van de pagina" class="brand" href="#boven">
+<span aria-hidden="true" class="brand-icon">
       ✳
      </span>
-     <span>
+<span>
       Logopedist Ekeren
      </span>
-    </a>
-    <span class="top-note">
+</a>
+<span class="top-note">
      Persoonlijke logopedische begeleiding
     </span>
-   </div>
-  </header>
-  <section class="hero" id="boven">
-   <div class="container hero-layout">
-    <div>
-     <span class="eyebrow">
+</div>
+</header>
+<section class="hero" id="boven">
+<div class="container hero-layout">
+<div>
+<span class="eyebrow">
       Logopedie in Ekeren
      </span>
-     <h1>
+<h1>
       Ruimte om te
       <em>
        groeien.
       </em>
-     </h1>
-     <p>
+</h1>
+<p>
       Een plek voor logopedische begeleiding met aandacht voor jouw hulpvraag, duidelijke communicatie en een persoonlijke aanpak.
      </p>
-     <div class="actions">
-      <button class="btn btn-primary" data-tab="tab3" type="button">
+<div class="actions">
+<button class="btn btn-primary" data-tab="tab3" type="button">
        Neem contact op
        <span aria-hidden="true">
         ↗
        </span>
-      </button>
-      <button class="btn btn-secondary" data-tab="tab1" type="button">
+</button>
+<button class="btn btn-secondary" data-tab="tab1" type="button">
        Ontdek meer
       </button>
-     </div>
-    </div>
-    <div class="hero-art">
-     <div class="art-circle">
-      <img class="art-photo" src="Foto.jpg" alt="Foto van de logopediepraktijk"/>
-     </div>
-     <div class="floating">
+</div>
+</div>
+<div class="hero-art">
+<div class="art-circle">
+<img alt="Foto van de logopediepraktijk" class="art-photo" src="Foto.jpg"/>
+</div>
+<div class="floating">
       ✦ Samen vooruit
      </div>
-    </div>
-   </div>
-  </section>
-  <nav aria-label="Hoofdnavigatie" class="nav-wrap">
-   <div class="container">
-    <div aria-label="Paginaonderdelen" class="tabs" role="tablist">
-     <button aria-controls="tab1" aria-selected="true" class="tab-button" id="tab1-button" role="tab" tabindex="0">
+</div>
+</div>
+</section>
+<nav aria-label="Hoofdnavigatie" class="nav-wrap">
+<div class="container">
+<div aria-label="Paginaonderdelen" class="tabs" role="tablist">
+<button aria-controls="tab1" aria-selected="true" class="tab-button" id="tab1-button" role="tab" tabindex="0">
       Over mij
      </button>
-     <button aria-controls="tab2" aria-selected="false" class="tab-button" id="tab2-button" role="tab" tabindex="-1">
+<button aria-controls="tab2" aria-selected="false" class="tab-button" id="tab2-button" role="tab" tabindex="-1">
       Mijn aanpak
      </button>
-     <button aria-controls="tab3" aria-selected="false" class="tab-button" id="tab3-button" role="tab" tabindex="-1">
+<button aria-controls="tab3" aria-selected="false" class="tab-button" id="tab3-button" role="tab" tabindex="-1">
       Contact
      </button>
-     <button aria-controls="tab4" aria-selected="false" class="tab-button" id="tab4-button" role="tab" tabindex="-1">
+<button aria-controls="tab4" aria-selected="false" class="tab-button" id="tab4-button" role="tab" tabindex="-1">
       Tarieven
      </button>
-    </div>
-   </div>
-  </nav>
-  <main class="container content" id="inhoud">
-   <section aria-labelledby="tab1-button" class="tab-content" id="tab1" role="tabpanel" tabindex="0">
-    <div class="section-intro">
-     <p class="kicker">
+</div>
+</div>
+</nav>
+<main class="container content" id="inhoud">
+<section aria-labelledby="tab1-button" class="tab-content" id="tab1" role="tabpanel" tabindex="0">
+<div class="section-intro">
+<p class="kicker">
       Aangenaam kennismaken
      </p>
-     <h2>
+<h2>
       Over mij
      </h2>
-     <p>
+<p>
       Logopedie draait om meer dan woorden alleen. In de praktijk staat een persoonlijke, zorgvuldige begeleiding centraal.
      </p>
-    </div>
-    <div class="cards">
-     <article class="card">
-      <div aria-hidden="true" class="card-icon">
+</div>
+<div class="cards">
+<article class="card">
+<div aria-hidden="true" class="card-icon">
        ♡
       </div>
-      <h3>
+<h3>
        Persoonlijke begeleiding
       </h3>
-      <p>
+<p>
        Elke hulpvraag is anders. Daarom nemen we de tijd om de moeilijkheden, verwachtingen en doelen in kaart te brengen.
       </p>
-     </article>
-     <article class="card">
-      <div aria-hidden="true" class="card-icon">
+</article>
+<article class="card">
+<div aria-hidden="true" class="card-icon">
        ✧
       </div>
-      <h3>
+<h3>
        Een vertrouwde omgeving
       </h3>
-      <p>
+<p>
        Een open gesprek, duidelijke uitleg en een respectvolle aanpak vormen de basis voor een goede samenwerking.
       </p>
-     </article>
-    </div>
-   </section>
-   <section aria-labelledby="tab2-button" class="tab-content" hidden="" id="tab2" role="tabpanel" tabindex="0">
-    <div class="section-intro">
-     <p class="kicker">
+</article>
+</div>
+</section>
+<section aria-labelledby="tab2-button" class="tab-content" hidden="" id="tab2" role="tabpanel" tabindex="0">
+<div class="section-intro">
+<p class="kicker">
       Persoonlijk en betrokken
      </p>
-     <h2>
+<h2>
       Mijn aanpak
      </h2>
-     <p>
+<p>
       We vertrekken vanuit de hulpvraag en bekijken samen welke ondersteuning passend is.
      </p>
-    </div>
-    <div class="cards">
-     <article class="card">
-      <div aria-hidden="true" class="card-icon">
+</div>
+<div class="cards">
+<article class="card">
+<div aria-hidden="true" class="card-icon">
        ◎
       </div>
-      <h3>
+<h3>
        Individuele begeleiding
       </h3>
-      <p>
+<p>
        De begeleiding sluit zo goed mogelijk aan bij de behoeften, mogelijkheden en doelstellingen van de cliënt.
       </p>
-     </article>
-     <article class="card">
-      <div aria-hidden="true" class="card-icon">
+</article>
+<article class="card">
+<div aria-hidden="true" class="card-icon">
        ☼
       </div>
-      <h3>
+<h3>
        Samen groeien
       </h3>
-      <p>
+<p>
        We werken stap voor stap, met aandacht voor haalbare doelen, heldere communicatie en regelmatige evaluatie.
       </p>
-     </article>
-    </div>
-   </section>
-   <section aria-labelledby="tab3-button" class="tab-content" hidden="" id="tab3" role="tabpanel" tabindex="0">
-    <div class="section-intro">
-     <p class="kicker">
+</article>
+</div>
+</section>
+<section aria-labelledby="tab3-button" class="tab-content" hidden="" id="tab3" role="tabpanel" tabindex="0">
+<div class="section-intro">
+<p class="kicker">
       Laat van je horen
      </p>
-     <h2>
+<h2>
       Contact
      </h2>
-     <p>
+<p>
       Heb je vragen over logopedie of wil je een afspraak aanvragen? Neem gerust contact op met de praktijk.
      </p>
-    </div>
-    <div class="cards">
-     <article class="card">
-      <div aria-hidden="true" class="card-icon">
-       ✉
-      </div>
-      <h3>
-       E-mail
-      </h3>
-      <p>
-       <a class="contact-link" href="mailto:jouw.email@voorbeeld.be">
+</div>
+<div class="cards">
+<article class="card">
+
+<h3>E-mail en telefoon</h3>
+<p><span aria-hidden="true" class="inline-contact-icon">✉</span>
+<a class="contact-link" href="mailto:jouw.email@voorbeeld.be">
         jouw.email@voorbeeld.be
        </a>
-      </p>
-     </article>
-     <article class="card">
-      <div aria-hidden="true" class="card-icon">
-       ⌁
-      </div>
-      <h3>
-       Praktijkinformatie
-      </h3>
-      <p>
-       Praktijk in Ekeren. Adres, telefoonnummer en openingsuren worden hier binnenkort vermeld.
-      </p>
-     </article>
-    </div>
-   </section>
-   <section aria-labelledby="tab4-button" class="tab-content" hidden="" id="tab4" role="tabpanel" tabindex="0">
-    <div class="section-intro">
-     <p class="kicker">
+</p>
+<p class="contact-telephone"><span aria-hidden="true" class="inline-contact-icon">☎</span>Telefoonnummer nog in te vullen</p></article>
+<article class="card uren-card"><section aria-labelledby="openingsuren-titel" class="openingsuren">
+<h3 id="openingsuren-titel">Openingstijden</h3>
+<p>Bekijk hieronder de beschikbaarheid per dag. Afspraken zijn steeds vooraf te regelen.</p>
+<ul aria-label="Openingstijden van maandag tot zondag" class="uren-lijst" id="openingsuren-lijst"></ul>
+</section></article>
+</div>
+
+<div class="praktijk-locatie">
+<h3>Ligging van de praktijk</h3>
+<p>Stationstraat 1, 2950 Kapellen</p>
+<div class="praktijk-kaart">
+<iframe allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?width=600&amp;height=400&amp;hl=nl&amp;q=Stationstraat%201%2C%202950%20Kapellen&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" title="Google Maps: Stationstraat 1, 2950 Kapellen">
+</iframe>
+</div>
+</div>
+</section>
+<section aria-labelledby="tab4-button" class="tab-content" hidden="" id="tab4" role="tabpanel" tabindex="0">
+<div class="section-intro">
+<p class="kicker">
       Duidelijk en transparant
      </p>
-     <h2>
+<h2>
       Tarieven &amp; terugbetaling
      </h2>
-     <p>
+<p>
       Hieronder zie je voorbeelden van de kosten van logopedische zorg. De uiteindelijke prijs en terugbetaling zijn afhankelijk van je situatie.
      </p>
-    </div>
-    <div class="table-scroll">
-     <table class="tariff-table">
-      <caption class="tariff-caption" id="tariff-caption">
+</div>
+<div class="table-scroll">
+<table class="tariff-table">
+<caption class="tariff-caption" id="tariff-caption">
        Indicatieve tarieven
       </caption>
-      <thead>
-       <tr>
-        <th scope="col">
+<thead>
+<tr>
+<th scope="col">
          Behandeling
         </th>
-        <th scope="col">
+<th scope="col">
          Honorarium
         </th>
-        <th scope="col">
+<th scope="col">
          Terugbetaling
         </th>
-        <th scope="col">
+<th scope="col">
          Remgeld
         </th>
-       </tr>
-      </thead>
-      <!-- De tabelrijen worden automatisch opgebouwd uit TARIEVEN hieronder. -->
-      <tbody id="tarieven-inhoud"></tbody>
-     </table>
-    </div>
-    <div class="notice">
+</tr>
+</thead>
+<!-- De tabelrijen worden automatisch opgebouwd uit TARIEVEN hieronder. -->
+<tbody id="tarieven-inhoud"></tbody>
+</table>
+</div>
+<div class="notice">
      Let op: de bedragen in deze tabel zijn illustratief en geen bevestigde praktijk- of RIZIV-tarieven. Of je recht hebt op terugbetaling en hoeveel je zelf betaalt, hangt onder andere af van de prestatie, de voorwaarden van de verplichte ziekteverzekering, de conventiestatus en een eventuele verhoogde tegemoetkoming. Informeer vooraf bij de praktijk en je ziekenfonds.
     </div>
-   </section>
-  </main>
-  <footer class="footer">
-   <div class="container footer-inner">
-    <p>
+</section>
+</main>
+<footer class="footer">
+<div class="container footer-inner">
+<p>
      ©
      <span id="year">
-     </span>
+</span>
      Logopedist Ekeren. Alle rechten voorbehouden.
     </p>
-    <small>
+<small>
      Logopedie in Ekeren
     </small>
-   </div>
-  </footer>
-  <script>
+</div>
+</footer>
+<script>
+    // ============================================================
+    // OPENINGSUREN BEHEREN — PAS HIER DE UREN AAN
+    // ============================================================
+    // Vervang "Nog in te vullen" door bijvoorbeeld "09:00 – 12:00 / 13:00 – 17:00".
+    // Gebruik "Gesloten" voor een sluitingsdag.
+    // De onderstaande uren zijn bewust niet verzonnen.
+    const OPENINGSUREN = [
+      { dag: "Maandag", uren: "08u00 - 12u00 & 13u00 - 16u00" },
+      { dag: "Dinsdag", uren: "Nog in te vullen" },
+      { dag: "Woensdag", uren: "Nog in te vullen" },
+      { dag: "Donderdag", uren: "Nog in te vullen" },
+      { dag: "Vrijdag", uren: "Nog in te vullen" },
+      { dag: "Zaterdag", uren: "Nog in te vullen" },
+      { dag: "Zondag", uren: "Nog in te vullen" }
+    ];
+
+    function toonOpeningsuren() {
+      const lijst = document.getElementById("openingsuren-lijst");
+      if (!lijst) return;
+      lijst.replaceChildren();
+      OPENINGSUREN.forEach(({ dag, uren }) => {
+        const rij = document.createElement("li");
+        rij.className = "uren-rij" + (uren.toLowerCase() === "gesloten" ? " gesloten" : "");
+        const dagElement = document.createElement("span");
+        dagElement.className = "uren-dag";
+        dagElement.textContent = dag;
+        const urenElement = document.createElement("span");
+        urenElement.className = "uren-tijd";
+        urenElement.textContent = uren;
+        rij.append(dagElement, urenElement);
+        lijst.appendChild(rij);
+      });
+    }
+    toonOpeningsuren();
+
     // ============================================================
     // TARIEVEN BEHEREN — PAS ELK JAAR ALLEEN DIT BLOK AAN
     // ============================================================
@@ -842,6 +928,5 @@ tbody tr:hover {
     document.getElementById("year").textContent = new Date().getFullYear();
     toonTarieven();
   </script>
- </body>
+</body>
 </html>
-
