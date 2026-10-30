@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+  <meta content="#f7f8f4" name="theme-color"/>
+  <meta content="Logopedist Ekeren: informatie over logopedische begeleiding, werkwijze, contact en indicatieve tarieven." name="description"/>
+  <title>
+   Logopedist Ekeren | Logopediepraktijk
+  </title>
+  <style>
+:root {
+  --ink:#203c35;
+  --muted:#64766d;
+  --green:#416e5e;
+  --green-dark:#2d5548;
+  --sage:#e4eee5;
+  --cream:#f7f8f4;
+  --white:#fff;
+  --line:#dfe7df;
+  --shadow:0 18px 55px rgba(36,69,52,.09)
+}
+* {
+  box-sizing:border-box
+}
+html {
+  scroll-behavior:smooth
+}
+body {
+  margin:0;
+  background:var(--cream);
+  color:var(--ink);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  line-height:1.65
+}
+button,a {
+  font:inherit
+}
+a {
+  color:var(--green-dark)
+}
+a:hover {
+  text-decoration:underline
+}
+button:focus-visible,a:focus-visible {
+  outline:3px solid #a6bc7c;
+  outline-offset:4px
+}
+.container {
+  width:min(1120px,calc(100% - 40px));
+  margin:auto
+}
+.topbar {
+  background:var(--white);
+  border-bottom:1px solid var(--line)
+}
+.topbar-inner {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  min-height:76px
+}
+.brand {
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-decoration:none;
+  color:var(--ink);
+  font-weight:800;
+  letter-spacing:-.035em;
+  font-size:1.18rem
+}
+.brand-icon {
+  display:grid;
+  place-items:center;
+  width:43px;
+  height:43px;
+  border-radius:15px;
+  background:var(--sage);
+  font-size:1.35rem
+}
+.top-note {
+  color:var(--muted);
+  font-size:.88rem
+}
+.hero {
+  padding:90px 0 82px;
+  overflow:hidden;
+  background:radial-gradient(circle at 85% 10%,#dceadd 0,transparent 39%),linear-gradient(140deg,#f7f8f4,#eef3eb)
+}
+.hero-layout {
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:50px;
+  align-items:center
+}
+.eyebrow {
+  display:inline-flex;
+  align-items:center;
+  gap:9px;
+  background:#e2eee4;
+  border:1px solid #cfdfd0;
+  border-radius:999px;
+  padding:7px 15px;
+  color:#37614e;
+  font-size:.84rem;
+  font-weight:700;
+  letter-spacing:.025em
+}
+.eyebrow:before {
+  content:"";
+  width:8px;
+  height:8px;
+  background:#74a58b;
+  border-radius:50%
+}
+h1,h2,h3,p {
+  margin-top:0
+}
+h1 {
+  font-size:clamp(2.8rem,6vw,5.3rem);
+  line-height:1.08;
+  letter-spacing:-.065em;
+  margin:24px 0
+}
+h1 em {
+  font-style:normal;
+  color:var(--green)
+}
+.hero p {
+  max-width:560px;
+  color:var(--muted);
+  font-size:1.1rem
+}
+.actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:28px
+}
+.btn {
+  border:1px solid transparent;
+  border-radius:13px;
+  padding:13px 22px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s
+}
+.btn:hover {
+  text-decoration:none;
+  transform:translateY(-2px)
+}
+.btn-primary {
+  background:var(--green-dark);
+  color:white
+}
+.btn-secondary {
+  background:white;
+  border-color:var(--line);
+  color:var(--ink)
+}
+.hero-art {
+  position:relative;
+  min-height:360px;
+  display:grid;
+  place-items:center
+}
+.art-circle {
+  width:min(100%,365px);
+  aspect-ratio:1;
+  border-radius:45% 55% 51% 49%;
+  background:linear-gradient(135deg,#c8ddca,#89ad9b);
+  display:grid;
+  place-items:center;
+  box-shadow:var(--shadow);
+  position:relative
+}
+.art-circle:after {
+  content:"";
+  position:absolute;
+  inset:20px;
+  border:1px solid #ffffff85;
+  border-radius:inherit
+}
+.art-mark {
+  font-family:Georgia,serif;
+  color:white;
+  font-size:clamp(7rem,16vw,12rem);
+  line-height:1;
+  transform:rotate(-9deg)
+}
+.floating {
+  position:absolute;
+  right:0;
+  bottom:14px;
+  background:#fff;
+  padding:15px 21px;
+  border-radius:16px;
+  box-shadow:var(--shadow);
+  font-weight:700;
+  font-size:.93rem
+}
+.nav-wrap {
+  background:#fff;
+  border-bottom:1px solid var(--line);
+  position:sticky;
+  top:0;
+  z-index:10
+}
+.tabs {
+  display:flex;
+  gap:8px;
+  padding:11px 0;
+  overflow-x:auto;
+  scrollbar-width:thin
+}
+.tab-button {
+  border:0;
+  background:transparent;
+  color:#60746a;
+  border-radius:11px;
+  padding:12px 19px;
+  white-space:nowrap;
+  cursor:pointer;
+  font-weight:700
+}
+.tab-button:hover {
+  background:#f0f5ef
+}
+.tab-button[aria-selected=true] {
+  background:var(--green-dark);
+  color:#fff
+}
+.content {
+  padding:70px 0 95px;
+  min-height:430px
+}
+.tab-content[hidden] {
+  display:none
+}
+.section-intro {
+  max-width:720px;
+  margin-bottom:30px
+}
+.kicker {
+  text-transform:uppercase;
+  letter-spacing:.15em;
+  font-size:.77rem;
+  color:var(--green);
+  font-weight:800;
+  margin-bottom:8px
+}
+h2 {
+  font-size:clamp(2rem,4vw,3rem);
+  letter-spacing:-.05em;
+  line-height:1.2;
+  margin-bottom:14px
+}
+.section-intro>p:last-child {
+  color:var(--muted);
+  font-size:1.05rem
+}
+.cards {
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:20px
+}
+.card {
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:22px;
+  padding:30px;
+  box-shadow:0 7px 26px #294a3610
+}
+.card h3 {
+  font-size:1.18rem;
+  letter-spacing:-.02em;
+  margin:12px 0 8px
+}
+.card p {
+  color:var(--muted);
+  margin:0
+}
+.card-icon {
+  width:46px;
+  height:46px;
+  border-radius:14px;
+  background:var(--sage);
+  display:grid;
+  place-items:center;
+  font-size:1.35rem
+}
+.contact-link {
+  overflow-wrap:anywhere;
+  font-weight:700
+}
+.notice {
+  border:1px solid #d8e6d8;
+  background:#eaf2e9;
+  color:#3b604d;
+  border-radius:16px;
+  padding:17px 20px;
+  margin:25px 0
+}
+.table-scroll {
+  overflow-x:auto;
+  border:1px solid var(--line);
+  border-radius:20px;
+  background:#fff;
+  box-shadow:var(--shadow)
+}
+table {
+  width:100%;
+  border-collapse:collapse;
+  min-width:510px
+}
+th,td {
+  text-align:left;
+  padding:20px 24px;
+  border-bottom:1px solid var(--line)
+}
+th {
+  background:#eaf2e9;
+  color:#315847;
+  font-size:.92rem
+}
+tr:last-child td {
+  border-bottom:0
+}
+tbody tr:hover {
+  background:#f9fbf8
+}
+.footer {
+  background:#203d34;
+  color:#e3eee6;
+  padding:32px 0
+}
+.footer-inner {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap
+}
+.footer p {
+  margin:0;
+  font-size:.91rem
+}
+.footer small {
+  color:#b6cbbd
+}
+@media(max-width:720px) {
+  .hero {
+    padding:56px 0
+  }
+  .hero-layout {
+    grid-template-columns:1fr;
+    gap:15px
+  }
+  .hero-art {
+    min-height:240px
+  }
+  .art-circle {
+    width:225px
+  }
+  .art-mark {
+    font-size:8rem
+  }
+  .floating {
+    right:5%;
+    bottom:0
+  }
+  .top-note {
+    display:none
+  }
+  .content {
+    padding:46px 0 70px
+  }
+  .cards {
+    grid-template-columns:1fr
+  }
+  .card {
+    padding:24px
+  }
+  .tab-button {
+    padding:11px 15px
+  }
+  .footer-inner {
+    align-items:flex-start;
+    flex-direction:column
+  }
+}
+@media(prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior:auto
+  }
+  .btn {
+    transition:none
+  }
+}
+/* Compacte, responsive tarieventabel */
+.tariff-caption {
+  caption-side:top;
+  text-align:left;
+  padding:14px 16px;
+  font-weight:700;
+  color:var(--ink);
+  font-size:.9rem
+}
+.tariff-table {
+  min-width:0;
+  width:100%;
+  table-layout:fixed
+}
+.tariff-table th,.tariff-table td {
+  padding:13px 12px;
+  font-size:.92rem;
+  line-height:1.35
+}
+.tariff-table thead th:first-child {
+  width:37%
+}
+.tariff-table thead th:not(:first-child) {
+  width:21%
+}
+.tariff-table td {
+  white-space:nowrap;
+  font-variant-numeric:tabular-nums
+}
+.tariff-table tbody th {
+  font-weight:600;
+  text-align:left;
+  background:#fff
+}
+.tariff-table .amount {
+  font-weight:650
+}
+@media(max-width:650px) {
+  .container {
+    width:min(1120px,calc(100% - 24px))
+  }
+  .tariff-caption {
+    padding:12px 9px;
+    font-size:.78rem
+  }
+  .tariff-table th,.tariff-table td {
+    padding:11px 5px;
+    font-size:clamp(.67rem,2.65vw,.83rem);
+    line-height:1.3
+  }
+  .tariff-table thead th:first-child {
+    width:34%
+  }
+  .tariff-table thead th:not(:first-child) {
+    width:22%
+  }
+  .tariff-table thead th {
+    overflow-wrap:anywhere;
+    hyphens:auto
+  }
+  .tariff-table tbody th {
+    overflow-wrap:break-word
+  }
+  .tariff-table td {
+    white-space:nowrap;
+    letter-spacing:-.025em
+  }
+  .floating {
+    font-size:.83rem
+  }
+}
+@media(max-width:370px) {
+  .tariff-table th,.tariff-table td {
+    padding:10px 3px;
+    font-size:.65rem
+  }
+  .tariff-table thead th:first-child {
+    width:31%
+  }
+  .tariff-table thead th:not(:first-child) {
+    width:23%
+  }
+}
+  </style>
+  <link href="https://logopedist-ekeren.be/" rel="canonical"/>
+ </head>
+ <body>
+  <header class="topbar">
+   <div class="container topbar-inner">
+    <a aria-label="Logopedist Ekeren, naar het begin van de pagina" class="brand" href="#boven">
+     <span aria-hidden="true" class="brand-icon">
+      ✳
+     </span>
+     <span>
+      Logopedist Ekeren
+     </span>
+    </a>
+    <span class="top-note">
+     Persoonlijke logopedische begeleiding
+    </span>
+   </div>
+  </header>
+  <section class="hero" id="boven">
+   <div class="container hero-layout">
+    <div>
+     <span class="eyebrow">
+      Logopedie in Ekeren
+     </span>
+     <h1>
+      Ruimte om te
+      <em>
+       groeien.
+      </em>
+     </h1>
+     <p>
+      Een plek voor logopedische begeleiding met aandacht voor jouw hulpvraag, duidelijke communicatie en een persoonlijke aanpak.
+     </p>
+     <div class="actions">
+      <button class="btn btn-primary" data-tab="tab3" type="button">
+       Neem contact op
+       <span aria-hidden="true">
+        ↗
+       </span>
+      </button>
+      <button class="btn btn-secondary" data-tab="tab1" type="button">
+       Ontdek meer
+      </button>
+     </div>
+    </div>
+    <div aria-hidden="true" class="hero-art">
+     <div class="art-circle">
+      <span class="art-mark">
+       a
+      </span>
+     </div>
+     <div class="floating">
+      ✦ Samen vooruit
+     </div>
+    </div>
+   </div>
+  </section>
+  <nav aria-label="Hoofdnavigatie" class="nav-wrap">
+   <div class="container">
+    <div aria-label="Paginaonderdelen" class="tabs" role="tablist">
+     <button aria-controls="tab1" aria-selected="true" class="tab-button" id="tab1-button" role="tab" tabindex="0">
+      Over mij
+     </button>
+     <button aria-controls="tab2" aria-selected="false" class="tab-button" id="tab2-button" role="tab" tabindex="-1">
+      Mijn aanpak
+     </button>
+     <button aria-controls="tab3" aria-selected="false" class="tab-button" id="tab3-button" role="tab" tabindex="-1">
+      Contact
+     </button>
+     <button aria-controls="tab4" aria-selected="false" class="tab-button" id="tab4-button" role="tab" tabindex="-1">
+      Tarieven
+     </button>
+    </div>
+   </div>
+  </nav>
+  <main class="container content" id="inhoud">
+   <section aria-labelledby="tab1-button" class="tab-content" id="tab1" role="tabpanel" tabindex="0">
+    <div class="section-intro">
+     <p class="kicker">
+      Aangenaam kennismaken
+     </p>
+     <h2>
+      Over mij
+     </h2>
+     <p>
+      Logopedie draait om meer dan woorden alleen. In de praktijk staat een persoonlijke, zorgvuldige begeleiding centraal.
+     </p>
+    </div>
+    <div class="cards">
+     <article class="card">
+      <div aria-hidden="true" class="card-icon">
+       ♡
+      </div>
+      <h3>
+       Persoonlijke begeleiding
+      </h3>
+      <p>
+       Elke hulpvraag is anders. Daarom nemen we de tijd om de moeilijkheden, verwachtingen en doelen in kaart te brengen.
+      </p>
+     </article>
+     <article class="card">
+      <div aria-hidden="true" class="card-icon">
+       ✧
+      </div>
+      <h3>
+       Een vertrouwde omgeving
+      </h3>
+      <p>
+       Een open gesprek, duidelijke uitleg en een respectvolle aanpak vormen de basis voor een goede samenwerking.
+      </p>
+     </article>
+    </div>
+   </section>
+   <section aria-labelledby="tab2-button" class="tab-content" hidden="" id="tab2" role="tabpanel" tabindex="0">
+    <div class="section-intro">
+     <p class="kicker">
+      Persoonlijk en betrokken
+     </p>
+     <h2>
+      Mijn aanpak
+     </h2>
+     <p>
+      We vertrekken vanuit de hulpvraag en bekijken samen welke ondersteuning passend is.
+     </p>
+    </div>
+    <div class="cards">
+     <article class="card">
+      <div aria-hidden="true" class="card-icon">
+       ◎
+      </div>
+      <h3>
+       Individuele begeleiding
+      </h3>
+      <p>
+       De begeleiding sluit zo goed mogelijk aan bij de behoeften, mogelijkheden en doelstellingen van de cliënt.
+      </p>
+     </article>
+     <article class="card">
+      <div aria-hidden="true" class="card-icon">
+       ☼
+      </div>
+      <h3>
+       Samen groeien
+      </h3>
+      <p>
+       We werken stap voor stap, met aandacht voor haalbare doelen, heldere communicatie en regelmatige evaluatie.
+      </p>
+     </article>
+    </div>
+   </section>
+   <section aria-labelledby="tab3-button" class="tab-content" hidden="" id="tab3" role="tabpanel" tabindex="0">
+    <div class="section-intro">
+     <p class="kicker">
+      Laat van je horen
+     </p>
+     <h2>
+      Contact
+     </h2>
+     <p>
+      Heb je vragen over logopedie of wil je een afspraak aanvragen? Neem gerust contact op met de praktijk.
+     </p>
+    </div>
+    <div class="cards">
+     <article class="card">
+      <div aria-hidden="true" class="card-icon">
+       ✉
+      </div>
+      <h3>
+       E-mail
+      </h3>
+      <p>
+       <a class="contact-link" href="mailto:jouw.email@voorbeeld.be">
+        jouw.email@voorbeeld.be
+       </a>
+      </p>
+     </article>
+     <article class="card">
+      <div aria-hidden="true" class="card-icon">
+       ⌁
+      </div>
+      <h3>
+       Praktijkinformatie
+      </h3>
+      <p>
+       Praktijk in Ekeren. Adres, telefoonnummer en openingsuren worden hier binnenkort vermeld.
+      </p>
+     </article>
+    </div>
+   </section>
+   <section aria-labelledby="tab4-button" class="tab-content" hidden="" id="tab4" role="tabpanel" tabindex="0">
+    <div class="section-intro">
+     <p class="kicker">
+      Duidelijk en transparant
+     </p>
+     <h2>
+      Tarieven &amp; terugbetaling
+     </h2>
+     <p>
+      Hieronder zie je voorbeelden van de kosten van logopedische zorg. De uiteindelijke prijs en terugbetaling zijn afhankelijk van je situatie.
+     </p>
+    </div>
+    <div class="table-scroll">
+     <table class="tariff-table">
+      <caption class="tariff-caption" id="tariff-caption">
+       Indicatieve tarieven
+      </caption>
+      <thead>
+       <tr>
+        <th scope="col">
+         Behandeling
+        </th>
+        <th scope="col">
+         Honorarium
+        </th>
+        <th scope="col">
+         Terugbetaling
+        </th>
+        <th scope="col">
+         Remgeld
+        </th>
+       </tr>
+      </thead>
+      <!-- De tabelrijen worden automatisch opgebouwd uit TARIEVEN hieronder. -->
+      <tbody id="tarieven-inhoud"></tbody>
+     </table>
+    </div>
+    <div class="notice">
+     Let op: de bedragen in deze tabel zijn illustratief en geen bevestigde praktijk- of RIZIV-tarieven. Of je recht hebt op terugbetaling en hoeveel je zelf betaalt, hangt onder andere af van de prestatie, de voorwaarden van de verplichte ziekteverzekering, de conventiestatus en een eventuele verhoogde tegemoetkoming. Informeer vooraf bij de praktijk en je ziekenfonds.
+    </div>
+   </section>
+  </main>
+  <footer class="footer">
+   <div class="container footer-inner">
+    <p>
+     ©
+     <span id="year">
+     </span>
+     Logopedist Ekeren. Alle rechten voorbehouden.
+    </p>
+    <small>
+     Logopedie in Ekeren
+    </small>
+   </div>
+  </footer>
+  <script>
+    // ============================================================
+    // TARIEVEN BEHEREN — PAS ELK JAAR ALLEEN DIT BLOK AAN
+    // ============================================================
+    // 1. Wijzig het jaartal.
+    // 2. Pas per behandeling het honorarium en de terugbetaling aan.
+    // 3. Het remgeld wordt automatisch berekend.
+    // 4. Gebruik een punt voor decimalen (bijvoorbeeld 38.50).
+    //
+    // LET OP: dit zijn VOORBEELDBEDRAGEN, geen officiële tarieven.
+    // Controleer de bedragen en terugbetalingsvoorwaarden vóór publicatie.
+
+    const TARIEVEN_JAAR = 2027;
+
+    const TARIEVEN = [
+      {
+        behandeling: "Sessie 30 min.",
+        honorarium: 38.00,
+        terugbetaling: 31.50
+      },
+      {
+        behandeling: "Sessie 60 min.",
+        honorarium: 76.00,
+        terugbetaling: 63.00
+      },
+      {
+        behandeling: "Onderzoek / bilan",
+        honorarium: 95.00,
+        terugbetaling: 75.00
+      }
+    ];
+
+    // ============================================================
+    // WEBSITEFUNCTIONALITEIT — NORMAAL NIET AANPASSEN
+    // ============================================================
+
+    const euro = new Intl.NumberFormat("nl-BE", {
+      style: "currency",
+      currency: "EUR"
+    });
+
+    function maakCel(tekst, label) {
+      const cel = document.createElement("td");
+      cel.dataset.label = label;
+      const bedrag = document.createElement("span");
+      bedrag.className = "amount";
+      bedrag.textContent = tekst;
+      cel.appendChild(bedrag);
+      return cel;
+    }
+
+    function toonTarieven() {
+      const inhoud = document.getElementById("tarieven-inhoud");
+      const bijschrift = document.getElementById("tariff-caption");
+      bijschrift.textContent = `Indicatieve tarieven ${TARIEVEN_JAAR} — nog te bevestigen`;
+      inhoud.replaceChildren();
+
+      TARIEVEN.forEach((tarief) => {
+        const rij = document.createElement("tr");
+        const naam = document.createElement("th");
+        naam.scope = "row";
+        naam.textContent = tarief.behandeling;
+        rij.appendChild(naam);
+
+        const remgeld = tarief.honorarium - tarief.terugbetaling;
+        rij.appendChild(maakCel(euro.format(tarief.honorarium), "Honorarium"));
+        rij.appendChild(maakCel(euro.format(tarief.terugbetaling), "Terugbetaling"));
+        rij.appendChild(maakCel(euro.format(remgeld), "Remgeld"));
+        inhoud.appendChild(rij);
+      });
+    }
+
+    const tabs = Array.from(document.querySelectorAll('[role="tab"]'));
+
+    function showTab(id, focus = false) {
+      tabs.forEach((tab) => {
+        const selected = tab.getAttribute("aria-controls") === id;
+        tab.setAttribute("aria-selected", String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        document.getElementById(tab.getAttribute("aria-controls")).hidden = !selected;
+        if (selected && focus) tab.focus();
+      });
+    }
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => showTab(tab.getAttribute("aria-controls")));
+      tab.addEventListener("keydown", (event) => {
+        let next;
+        if (event.key === "ArrowRight") next = (index + 1) % tabs.length;
+        else if (event.key === "ArrowLeft") next = (index - 1 + tabs.length) % tabs.length;
+        else if (event.key === "Home") next = 0;
+        else if (event.key === "End") next = tabs.length - 1;
+        else return;
+
+        event.preventDefault();
+        showTab(tabs[next].getAttribute("aria-controls"), true);
+      });
+    });
+
+    document.querySelectorAll("[data-tab]").forEach((button) => {
+      button.addEventListener("click", () => {
+        showTab(button.dataset.tab);
+        document.querySelector(".nav-wrap").scrollIntoView({
+          behavior: matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth"
+        });
+      });
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    toonTarieven();
+  </script>
+ </body>
+</html>
+
