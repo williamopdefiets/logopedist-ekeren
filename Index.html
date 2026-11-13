@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>William op de fiets | Fietsenmaker via Ring Twice</title>
+    <style>
+        :root {
+            --primary: #10B981;
+            --primary-dark: #059669;
+            --secondary: #1E293B;
+            --bg-light: #F8FAFC;
+            --white: #FFFFFF;
+            --text-muted: #64748B;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, sans-serif; }
+        body { background-color: var(--bg-light); color: var(--secondary); line-height: 1.6; display: flex; flex-direction: column; min-height: 100vh; }
+        header { background-color: var(--white); box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 1000; }
+        .nav-container { max-width: 1100px; margin: 0 auto; padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--secondary); text-decoration: none; cursor: pointer; display: flex; align-items: center; gap: 0.5rem; }
+        .logo span { color: var(--primary); }
+        nav { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+        .tab-btn { background: none; border: none; font-size: 1rem; font-weight: 600; color: var(--secondary); padding: 0.6rem 1rem; border-radius: 8px; cursor: pointer; transition: 0.2s; }
+        .tab-btn:hover { background-color: #F1F5F9; color: var(--primary); }
+        .tab-btn.active { background-color: #ECFDF5; color: var(--primary-dark); }
+        .btn-reserve { background-color: var(--primary); color: var(--white); border: none; padding: 0.65rem 1.25rem; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; transition: 0.2s; text-decoration: none; display: inline-block; }
+        .btn-reserve:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
+        main { flex: 1; }
+        .tab-content { display: none; animation: fadeIn 0.3s ease; }
+        .tab-content.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+        .hero { background: linear-gradient(135deg, var(--secondary) 0%, #0F172A 100%); color: var(--white); text-align: center; padding: 4rem 1.5rem; border-radius: 16px; margin-bottom: 3rem; }
+        .hero h1 { font-size: 2.6rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.15rem; max-width: 650px; margin: 0 auto 2rem auto; color: #CBD5E1; }
+        .badge-rt { display: inline-block; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.9rem; margin-bottom: 1.5rem; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 3rem 1.5rem; }
+        .section-title { text-align: center; font-size: 2.2rem; margin-bottom: 0.5rem; }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 2.5rem; }
+        .pricing-grid, .trips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .price-card { background: var(--white); border-radius: 12px; padding: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border-top: 4px solid var(--primary); display: flex; flex-direction: column; justify-content: space-between; }
+        .price { font-size: 2rem; font-weight: 800; color: var(--primary); margin: 1rem 0; }
+        .price span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
+        .price-card ul { list-style: none; margin-bottom: 1.5rem; }
+        .price-card ul li { padding: 0.4rem 0; border-bottom: 1px solid #F1F5F9; font-size: 0.95rem; }
+        .price-card ul li::before { content: "✓ "; color: var(--primary); font-weight: bold; }
+        .rt-note { text-align: center; margin-top: 2rem; font-size: 0.9rem; color: var(--text-muted); background: #E2E8F0; padding: 1rem; border-radius: 8px; }
+        .about-container { background: var(--white); border-radius: 16px; padding: 3rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); display: grid; grid-template-columns: 1fr 2fr; gap: 2.5rem; align-items: center; }
+        .about-avatar { width: 100%; aspect-ratio: 1/1; background: #E2E8F0; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-weight: 600; text-align: center; padding: 1rem; }
+        .about-text h3 { font-size: 1.8rem; margin-bottom: 1rem; }
+        .about-text p { margin-bottom: 1rem; color: #334155; }
+        .trip-card { background: var(--white); border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.05); transition: 0.3s; }
+        .trip-card:hover { transform: translateY(-5px); }
+        .trip-img { height: 180px; background: var(--secondary); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; font-weight: bold; padding: 1rem; text-align: center; }
+        .trip-content { padding: 1.5rem; }
+        .trip-meta { font-size: 0.85rem; color: var(--primary); font-weight: 700; text-transform: uppercase; margin-bottom: 0.5rem; }
+        .booking-box { background: var(--primary); color: var(--white); border-radius: 16px; padding: 3.5rem 2rem; text-align: center; max-width: 750px; margin: 0 auto; }
+        .booking-box h2 { font-size: 2rem; margin-bottom: 1rem; }
+        .booking-box p { margin: 0 auto 2rem auto; font-size: 1.1rem; }
+        .btn-white { background: var(--white); color: var(--secondary); padding: 1rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 800; font-size: 1.1rem; display: inline-block; transition: 0.2s; }
+        .btn-white:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.15); }
+        footer { background: var(--secondary); color: #94A3B8; text-align: center; padding: 1.5rem; margin-top: auto; }
+        @media (max-width: 768px) { .about-container { grid-template-columns: 1fr; } .hero h1 { font-size: 2rem; } }
+        /* Stijl voor uMap en jouw eigen fietsreizen tabel */
+        .map-container { background: var(--white); padding: 1rem; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); margin-bottom: 2.5rem; border-top: 4px solid var(--primary); }
+        .map-container iframe { border-radius: 10px; display: block; }
+        .map-link { display: inline-block; margin-top: 0.8rem; color: var(--primary-dark); font-weight: 700; text-decoration: none; font-size: 0.95rem; }
+        .map-link:hover { text-decoration: underline; }
+        .table-wrapper { background: var(--white); border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.06); overflow-x: auto; border-top: 4px solid var(--primary); }
+        .william-table { width: 100%; border-collapse: collapse; text-align: left; font-size: 0.92rem; min-width: 800px; }
+        .william-table thead { background-color: var(--secondary); color: var(--white); }
+        .william-table th { padding: 1rem 0.75rem; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 0.5px; }
+        .william-table td { padding: 0.85rem 0.75rem; border-bottom: 1px solid #F1F5F9; color: var(--secondary); }
+        .william-table tbody tr:nth-child(even) { background-color: #F8FAFC; }
+        .william-table tbody tr:hover { background-color: #ECFDF5; }
+        .center { text-align: center !important; }
+        .check-badge { display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; background-color: var(--primary); color: var(--white); border-radius: 50%; font-size: 0.75rem; font-weight: bold; }
+        .km-pill { background-color: #ECFDF5; color: var(--primary-dark); font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 50px; font-size: 0.85rem; }
+        .william-table tfoot { background-color: var(--secondary); color: var(--white); font-weight: 700; }
+        .william-table tfoot td { color: var(--white); border-top: 3px solid var(--primary); padding: 0.9rem 0.75rem; }
+        .william-table tfoot tr:last-child td { border-top: 1px solid #334155; color: #6EE7B7; }
+        /* Twee onderhoudspakketten naast elkaar & brede herstellingentabel eronder */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        .repairs-box {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid var(--primary);
+        }
+        .repairs-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.3rem;
+            color: var(--secondary);
+        }
+        .repairs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.2rem;
+        }
+        .repairs-table thead {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+        .repairs-table th {
+            text-align: left;
+            padding: 0.9rem 1.2rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .repairs-table th:last-child,
+        .repairs-table td:last-child {
+            text-align: right;
+            white-space: nowrap;
+        }
+        .repairs-table td {
+            padding: 0.9rem 1.2rem;
+            border-bottom: 1px solid #F1F5F9;
+            color: var(--secondary);
+        }
+        .repairs-table tbody tr:nth-child(even) {
+            background-color: #F8FAFC;
+        }
+        .repairs-table tbody tr:hover {
+            background-color: #ECFDF5;
+        }
+        .repairs-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+        .price-tag {
+            background-color: #ECFDF5;
+            color: var(--primary-dark);
+            font-weight: 800;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.95rem;
+        }
+
+        /* Stappenplan in de hero-banner */
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            max-width: 900px;
+            margin: 0 auto 2.5rem auto;
+            text-align: left;
+        }
+        .step-box {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 1.2rem;
+            position: relative;
+        }
+        .step-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            background-color: var(--primary);
+            color: var(--white);
+            font-weight: 800;
+            border-radius: 50%;
+            font-size: 0.9rem;
+            margin-bottom: 0.6rem;
+        }
+        .step-box h4 {
+            color: var(--white);
+            font-size: 1.05rem;
+            margin-bottom: 0.3rem;
+        }
+        .step-box p {
+            color: #CBD5E1;
+            font-size: 0.88rem;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo" onclick="openTab('tarieven')">🚲 William <span>op de fiets</span></div>
+            <nav>
+                <button class="tab-btn active" id="btn-tarieven" onclick="openTab('tarieven')">Tarieven</button>
+                <button class="tab-btn" id="btn-over-mij" onclick="openTab('over-mij')">Over mij</button>
+                <button class="tab-btn" id="btn-fietsvakanties" onclick="openTab('fietsvakanties')">Mijn fietsvakanties</button>
+                <button class="btn-reserve" id="btn-reservatie" onclick="openTab('reservatie')">Maak je reservatie</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+                <div id="tab-tarieven" class="tab-content active">
+            <div class="hero">
+                <div class="badge-rt">✓ Erkend fietshersteller via Ring Twice</div>
+                <h1>William op de fiets</h1>
+                <p>Snel, eerlijk en vakkundig fietsonderhoud bij jou in de buurt. Van een lekke band tot een volledig nazicht voor je volgende grote rit.</p>
+                <div class="steps-grid">
+                    <div class="step-box">
+                        <div class="step-num">1</div>
+                        <h4>Contact via Ring Twice</h4>
+                        <p>Meld je herstelling aan en plan samen een geschikt moment in.</p>
+                    </div>
+                    <div class="step-box">
+                        <div class="step-num">2</div>
+                        <h4>Breng je fiets langs</h4>
+                        <p>Zet je fiets af bij William op het afgesproken tijdstip.</p>
+                    </div>
+                    <div class="step-box">
+                        <div class="step-num">3</div>
+                        <h4>Vakkundig herstel</h4>
+                        <p>Je fiets krijgt het nodige onderhoud volgens duidelijke afspraken.</p>
+                    </div>
+                    <div class="step-box">
+                        <div class="step-num">4</div>
+                        <h4>Haal je fiets op</h4>
+                        <p>Rij weer veilig weg en rond de betaling vlot af via Ring Twice.</p>
+                    </div>
+                </div>
+
+                <a href="https://ringtwice.be" target="_blank" class="btn-reserve" style="padding: 1rem 2rem; font-size: 1.1rem;">Plan direct je herstelling</a>
+
+            </div>
+
+            <h2 class="section-title">Tarieven &amp; Onderhoud</h2>
+            <p class="section-subtitle">Duidelijke prijzen zonder verrassingen, veilig afgehandeld via Ring Twice.</p>
+            <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2.5rem;">
+                <span style="background-color: #ECFDF5; color: var(--primary-dark); border: 1px solid #A7F3D0; padding: 0.45rem 1.1rem; border-radius: 50px; font-size: 0.9rem; font-weight: 700;">
+                    ● Groene prijs: Ring Twice Premium (0% commissie)
+                </span>
+                <span style="background-color: #FEF3C7; color: #B45309; border: 1px solid #FDE68A; padding: 0.45rem 1.1rem; border-radius: 50px; font-size: 0.9rem; font-weight: 700;">
+                    ● Oranje prijs: Standaard tarief (incl. 20% commissie)
+                </span>
+            </div>
+
+                        <div class="packages-grid">
+                <div class="price-card">
+                    <div>
+                        <h3>Standaard Onderhoud</h3>
+                        <div style="margin: 1rem 0; display: flex; align-items: baseline; flex-wrap: wrap;">
+                            <span data-prijs="standaardOnderhoud" style="font-size: 2rem; font-weight: 800; color: var(--primary);"></span>
+                        </div>
+                        <ul>
+                            <li>Controle en afstellen van remmen en versnellingen</li>
+                            <li>Grondige reiniging van volledige aandrijflijn</li>
+                            <li>Wielen richten en spaken controleren</li>
+                            <li>Controle van balhoofd, trapas en wiellagers</li>
+                            <li>Alle bouten en moeren op moment aantrekken</li>
+                            <li>Bandenspanning en verlichting nakijken</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="price-card">
+                    <div>
+                        <h3>Uitgebreid Onderhoud</h3>
+                        <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1rem;">Aanbevolen voor de kilometervreters</strong>:</p>
+
+                        <div style="background: #F8FAFC; padding: 0.9rem 1rem; border-radius: 10px; margin-bottom: 0.8rem; border-left: 4px solid var(--primary); display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong style="display: block; font-size: 1rem;">Lager voorwiel smeren</strong>
+                                <span style="font-size: 0.85rem; color: var(--text-muted);">Lager demonteren, reinigen en invetten</span>
+                            </div>
+                            <div style="white-space: nowrap; margin-left: 1rem; display: flex; align-items: baseline;">
+                                <span data-prijs="voorwielSmeren" data-plus="ja" style="font-size: 1.15rem; font-weight: 800; color: var(--primary);"></span>
+                            </div>
+                        </div>
+
+                        <div style="background: #F8FAFC; padding: 0.9rem 1rem; border-radius: 10px; margin-bottom: 0.8rem; border-left: 4px solid var(--primary); display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong style="display: block; font-size: 1rem;">Lager achterwiel smeren (derailleur)</strong>
+                                <span style="font-size: 0.85rem; color: var(--text-muted);">Lager demonteren, reinigen en invetten</span>
+                            </div>
+                            <div style="white-space: nowrap; margin-left: 1rem; display: flex; align-items: baseline;">
+                                <span data-prijs="achterwielSmeren" data-plus="ja" style="font-size: 1.15rem; font-weight: 800; color: var(--primary);"></span>
+                            </div>
+                        </div>
+
+                        <div style="background: #F8FAFC; padding: 0.9rem 1rem; border-radius: 10px; border-left: 4px solid var(--secondary); display: flex; justify-content: space-between; align-items: center;">
+                            <div>
+                                <strong style="display: block; font-size: 1rem;">Naafversnelling smeren</strong>
+                                <span style="font-size: 0.85rem; color: var(--text-muted);">Volledig nazicht en smering van versnellingsnaaf</span>
+                            </div>
+                            <span style="font-size: 0.95rem; font-weight: 700; color: var(--secondary); background: #E2E8F0; padding: 0.3rem 0.7rem; border-radius: 6px; white-space: nowrap; margin-left: 1rem;">Op aanvraag</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="repairs-box">
+                <h3>Courante Herstellingen</h3>
+                <p style="color: var(--text-muted); font-size: 0.95rem;">Overzicht van de meest voorkomende herstellingen. Arbeidsprijs per handeling (exclusief eventuele nieuwe onderdelen):</p>
+
+                <table class="repairs-table">
+                    <thead>
+                        <tr>
+                            <th>Courante Herstelling</th>
+                            <th>Omschrijving</th>
+                            <th>Prijs</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Lekke band herstellen</strong></td>
+                            <td>Binnenband plakken of binnen-/buitenband vervangen + op spanning zetten</td>
+                            <td><span class="price-tag" data-prijs="lekkeBand"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Remblokjes vervangen</strong></td>
+                            <td>Nieuwe remblokken plaatsen (per wiel) en remmen nauwkeurig afstellen</td>
+                            <td><span class="price-tag" data-prijs="remblokjes"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rem- of versnellingskabel</strong></td>
+                            <td>Nieuwe binnen- en/of buitenkabel monteren en terug afstellen</td>
+                            <td><span class="price-tag" data-prijs="kabelVervangen"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ketting &amp; tandwielen</strong></td>
+                            <td>Versleten ketting en/of cassette vervangen en smeren</td>
+                            <td><span class="price-tag" data-prijs="kettingTandwielen"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Versnellingen afstellen</strong></td>
+                            <td>Derailleur of naafversnelling terug soepel laten schakelen</td>
+                            <td><span class="price-tag" data-prijs="versnellingenAfstellen"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Verlichting herstellen</strong></td>
+                            <td>Koplamp, achterlicht of bedrading nakijken en herstellen</td>
+                            <td><span class="price-tag" data-prijs="verlichting"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Wiel richten</strong></td>
+                            <td>Slag uit het wiel halen en spaakspanning controleren</td>
+                            <td><span class="price-tag" data-prijs="wielRichten"></span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ketting spannen &amp; smeren</strong></td>
+                            <td>Ketting op juiste spanning brengen, reinigen en smeren</td>
+                            <td><span class="price-tag" data-prijs="kettingSpannen"></span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+           
+            <div class="rt-note">
+                <strong>Let op:</strong> Prijzen zijn exclusief eventuele nieuwe onderdelen. Alle betalingen en afspraken verlopen veilig en verzekerd via mijn profiel op <strong>Ring Twice</strong>.
+            </div>
+        </div>
+
+        <div id="tab-over-mij" class="tab-content">
+            <h2 class="section-title">Over mij</h2>
+            <p class="section-subtitle">Wie sleutelt er aan jouw tweewieler?</p>
+
+            <div class="about-container">
+                <div class="about-avatar">
+                    <span>📸 Jouw Foto Hier<br>(Bijv. met je fiets)</span>
+                </div>
+                <div class="about-text">
+                    <h3>Hoi, ik ben William!</h3>
+                    <p>Fietsen is voor mij veel meer dan alleen van A naar B gaan; het is mijn grootste passie. Wat begon met het zelf onderhouden van mijn eigen stadsfiets en koersfiets, groeide al snel uit tot het helpen van vrienden, buren en familie.</p>
+                    <p>Via <strong>Ring Twice</strong> bied ik mijn diensten aan als betrouwbare fietsenmaker in de buurt. Of je nu dagelijks naar je werk trapt of in het weekend graag lange tochten maakt: ik zorg ervoor dat je fiets weer soepel en veilig bolt.</p>
+                    <p>Geen wekenlange wachttijden, maar persoonlijk contact, eerlijk advies en oog voor detail.</p>
+                </div>
+            </div>
+        </div>
+
+          <div id="tab-fietsvakanties" class="tab-content">
+            <h2 class="section-title">Mijn fietsvakanties</h2>
+            <p class="section-subtitle">Onderweg leer je je fiets pas echt kennen. Bekijk al mijn gereden routes op de kaart en in het overzicht.</p>
+
+                        <div class="map-container">
+                <iframe id="umap-frame" width="100%" height="600px" frameborder="0" allowfullscreen allow="geolocation" src="//umap.openstreetmap.fr/en/map/william-op-de-fiets_1153516?scaleControl=false&miniMap=false&scrollWheelZoom=false&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=none&captionBar=false&captionMenus=true"></iframe>
+                <a class="map-link" target="_blank" href="//umap.openstreetmap.fr/en/map/william-op-de-fiets_1153516?scaleControl=false&miniMap=false&scrollWheelZoom=true&zoomControl=true&editMode=disabled&moreControl=true&searchControl=null&tilelayersControl=null&embedControl=null&datalayersControl=true&onLoadPanel=none&captionBar=false&captionMenus=true">🗺️ See full screen →</a>
+            </div>
+
+
+            <div class="table-wrapper">
+                <table class="william-table">
+                    <thead>
+                        <tr>
+                            <th class="center">Nr.</th>
+                            <th>Datum</th>
+                            <th>Traject</th>
+                            <th class="center">Dagen</th>
+                            <th class="center">Km</th>
+                            <th class="center">WB</th>
+                            <th class="center">MG</th>
+                            <th class="center">KD</th>
+                            <th class="center">BVO</th>
+                            <th class="center">NH</th>
+                            <th class="center">US</th>
+                            <th class="center">LM</th>
+                            <th class="center">KP</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="center"><strong>15</strong></td>
+                            <td>2026/06</td>
+                            <td><strong>Aarlen-Aosta</strong></td>
+                            <td class="center">7</td>
+                            <td class="center"><span class="km-pill">695</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td class="center"><strong>14</strong></td>
+                            <td>2024/07</td>
+                            <td><strong>Berlijn-Wenen</strong></td>
+                            <td class="center">8</td>
+                            <td class="center"><span class="km-pill">764</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td class="center"><strong>13</strong></td>
+                            <td>2023/05</td>
+                            <td><strong>Putte-Bouillon-Putte</strong></td>
+                            <td class="center">4</td>
+                            <td class="center"><span class="km-pill">446</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td class="center"><strong>12</strong></td>
+                            <td>2022/08</td>
+                            <td><strong>Antwerpen-Leeuwarden</strong></td>
+                            <td class="center">3</td>
+                            <td class="center"><span class="km-pill">329</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td class="center"><strong>11</strong></td>
+                            <td>2021/05</td>
+                            <td><strong>Rondje België</strong></td>
+                            <td class="center">4</td>
+                            <td class="center"><span class="km-pill">463</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td class="center"><strong>10</strong></td>
+                            <td>2020/08</td>
+                            <td><strong>Rondje Duitsland</strong></td>
+                            <td class="center">10</td>
+                            <td class="center"><span class="km-pill">904</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td class="center"><strong>09</strong></td>
+                            <td>2019/07</td>
+                            <td><strong>Ronde van Nederland</strong></td>
+                            <td class="center">12</td>
+                            <td class="center"><span class="km-pill">1395</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td class="center"><strong>08</strong></td>
+                            <td>2019/05</td>
+                            <td><strong>Leuven-Parijs</strong></td>
+                            <td class="center">4</td>
+                            <td class="center"><span class="km-pill">438</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+
+                        <tr>
+                            <td class="center"><strong>07</strong></td>
+                            <td>2019/05</td>
+                            <td><strong>Antwerpen-Rotterdam</strong></td>
+                            <td class="center">3</td>
+                            <td class="center"><span class="km-pill">140</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td class="center"><strong>06</strong></td>
+                            <td>2018/09</td>
+                            <td><strong>Achterhoek</strong></td>
+                            <td class="center">3</td>
+                            <td class="center"><span class="km-pill">167</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td class="center"><strong>05</strong></td>
+                            <td>2018/07</td>
+                            <td><strong>Antwerpen-Zurich</strong></td>
+                            <td class="center">10</td>
+                            <td class="center"><span class="km-pill">934</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td class="center"><strong>04</strong></td>
+                            <td>2018/05</td>
+                            <td><strong>Hasselt-Eindhoven-Antwerpen</strong></td>
+                            <td class="center">2</td>
+                            <td class="center"><span class="km-pill">186</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td class="center"><strong>03</strong></td>
+                            <td>2017/09</td>
+                            <td><strong>Antwerpen-Vlissingen-Antwerpen</strong></td>
+                            <td class="center">2</td>
+                            <td class="center"><span class="km-pill">257</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td class="center"><strong>02</strong></td>
+                            <td>2017/08</td>
+                            <td><strong>Antwerpen-Amsterdam</strong></td>
+                            <td class="center">3</td>
+                            <td class="center"><span class="km-pill">248</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                        </tr>
+                        <tr>
+                            <td class="center"><strong>01</strong></td>
+                            <td>2017/05</td>
+                            <td><strong>Antwerpen-Amsterdam</strong></td>
+                            <td class="center">4</td>
+                            <td class="center"><span class="km-pill">229</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"></td><td class="center"></td><td class="center"></td><td class="center"></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                            <td class="center"><span class="check-badge">✓</span></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="5">Totaal dagen</td>
+                            <td class="center">79</td>
+                            <td class="center">40</td>
+                            <td class="center">34</td>
+                            <td class="center">6</td>
+                            <td class="center">4</td>
+                            <td class="center">4</td>
+                            <td class="center">4</td>
+                            <td class="center">4</td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">Totaal km</td>
+                            <td class="center">7595</td>
+                            <td class="center">4069</td>
+                            <td class="center">3315</td>
+                            <td class="center">307</td>
+                            <td class="center">446</td>
+                            <td class="center">229</td>
+                            <td class="center">229</td>
+                            <td class="center">229</td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+
+
+        </div>
+
+        <div id="tab-reservatie" class="tab-content">
+            <h2 class="section-title">Maak je reservatie</h2>
+            <p class="section-subtitle">Boek snel en veilig je herstelling via Ring Twice.</p>
+
+            <div class="booking-box">
+                <h2>Klaar om je fiets te laten nakijken?</h2>
+                <p>Klik op de knop hieronder om direct naar mijn officiële Ring Twice profiel te gaan. Kies een moment dat voor jou past en ik ga voor je aan de slag!</p>
+                <a href="https://ringtwice.be" target="_blank" class="btn-white">Boek William via Ring Twice →</a>
+            </div>
+        </div>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 William op de fiets • Fietsenmaker op afspraak via Ring Twice</p>
+    </footer>
+
+    <script>
+        /* ==============================================================
+           PAS HIER AL JE PRIJZEN AAN (OP ÉÉN CENTRALE PLEK)
+           De pagina vult de groene prijs, de / en de +20% vanzelf in!
+        ============================================================== */
+        var MIJN_PRIJZEN = {
+            standaardOnderhoud: 36,
+            voorwielSmeren: 15,
+            achterwielSmeren: 20,
+
+            // Courante herstellingen:
+            lekkeBand: 15,
+            remblokjes: 15,
+            kabelVervangen: 20,
+            kettingTandwielen: 25,
+            versnellingenAfstellen: 15,
+            verlichting: 15,
+            wielRichten: 20,
+            kettingSpannen: 10
+        };
+        /* ============================================================== */
+
+        function openTab(tabName) {
+            var contents = document.getElementsByClassName('tab-content');
+            for (var i = 0; i < contents.length; i++) {
+                contents[i].classList.remove('active');
+            }
+            var buttons = document.getElementsByClassName('tab-btn');
+            for (var i = 0; i < buttons.length; i++) {
+                buttons[i].classList.remove('active');
+            }
+            document.getElementById('tab-' + tabName).classList.add('active');
+            var activeBtn = document.getElementById('btn-' + tabName);
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+            if (tabName === 'fietsvakanties') {
+                var iframe = document.getElementById('umap-frame');
+                if (iframe && !iframe.dataset.loaded) {
+                    iframe.src = iframe.src;
+                    iframe.dataset.loaded = 'true';
+                }
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function formatEuro(bedrag, metPlus) {
+            var afgerond = Math.round(bedrag * 100) / 100;
+            var tekst = (afgerond % 1 === 0) ? afgerond.toString() : afgerond.toFixed(2).replace('.', ',');
+            return (metPlus ? '+ € ' : '€ ') + tekst;
+        }
+
+        function laadAllePrijzen() {
+            var velden = document.querySelectorAll('[data-prijs]');
+            for (var i = 0; i < velden.length; i++) {
+                var el = velden[i];
+                var sleutel = el.getAttribute('data-prijs');
+                var metPlus = el.getAttribute('data-plus') === 'ja';
+                var basis = MIJN_PRIJZEN[sleutel];
+
+                if (basis !== undefined) {
+                    el.textContent = formatEuro(basis, metPlus);
+
+                    var slash = document.createElement('span');
+                    slash.textContent = ' / ';
+                    slash.style.color = '#94A3B8';
+                    slash.style.fontWeight = '600';
+                    slash.style.margin = '0 0.3rem';
+
+                    var oranje = document.createElement('span');
+                    oranje.textContent = formatEuro(basis * 1.2, metPlus);
+                    oranje.style.fontWeight = '800';
+
+                    if (el.classList.contains('price-tag')) {
+                        oranje.style.backgroundColor = '#FEF3C7';
+                        oranje.style.color = '#B45309';
+                        oranje.style.padding = '0.3rem 0.75rem';
+                        oranje.style.borderRadius = '50px';
+                        oranje.style.fontSize = '0.9rem';
+                    } else {
+                        oranje.style.color = '#D97706';
+                        oranje.style.fontSize = '0.85em';
+                    }
+
+                    el.parentNode.insertBefore(slash, el.nextSibling);
+                    el.parentNode.insertBefore(oranje, slash.nextSibling);
+                }
+            }
+        }
+
+        laadAllePrijzen();
+    </script>
+</body>
+</html>
+
+
